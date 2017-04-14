@@ -1,6 +1,7 @@
 # Bangazon Orientation - Defining Your Departments
-## Will Sims
+### Will Sims
 ### April 2017
+## 
 
 ## Setup
 
