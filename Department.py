@@ -1,11 +1,19 @@
-class Department(object):
-    """ Parent class for all departments """
+import gc
 
-    def __init__(self, name = None, supervisor = None, employee_count = None):
+class Department(object):
+    """ Parent class for all departments.  """
+
+    def __init__(self, budget, name = None, supervisor = None, employee_count = None):
             self.employees = set()
             self.__name = name
             self.__supervisor = supervisor
             self.__employee_count = employee_count
+            self.__budget = budget
+            self.all_budgets = list()
+
+            for obj in gc.get_objects():
+                if isinstance(obj, Department):
+                    self.all_budgets.append([obj.name, obj.budget])
 
     ##################################################
     ##################  Properties ###################
@@ -54,7 +62,7 @@ class Department(object):
     # Employees Property ----------------------------------------------------------------
     @property
     def employees(self):
-        if len(self.employees) > 0:
+        if len(self.__employees) > 0:
             try:
                 return self.__employees
             except:
@@ -69,14 +77,50 @@ class Department(object):
         else:
             self.__employees = vals
 
+    @property
+    def employee_count(self):
+        try:
+            return self.__employee_count
+        except:
+            raise ValueError("Employee Count not found")
 
+    @employee_count.setter
+    def employee_count(self, val):
+        if not isinstance(val, int):
+            raise TypeError("Value must be an integer")
+        if not val == 0:
+            self.__employee_count = val
+        else:
+            raise ValueError("Value cannot be 0")
 
+    @property
+    def budget(self):
+            try:
+                return self.__budget
+            except:
+                raise ValueError("Budget not found")
 
-
+    @budget.setter
+    def budget(self, val):
+        if not isinstance(val, float):
+            raise TypeError("Budget must be a number")
+        if val > 5000 and not (val < 0):
+            try:
+                self.__budget = val
+            except:
+                raise ValueError("Couldnt find self.budget!")
 
 
 
     ##################################################
     ####################  Methods ####################
     ##################################################
+
+
+    def get_all_budgets(self):
+        for row in self.all_budgets:
+            print("{} : ${}".format(row[0], row[1]))
+
+
+
 

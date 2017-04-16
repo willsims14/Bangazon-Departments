@@ -8,8 +8,8 @@ class HumanResources(Department):
 
     '''
 
-    def __init__(self, name, supervisor = None, employee_count = None):
-        super().__init__(name, supervisor, employee_count)
+    def __init__(self, budget, name, supervisor = None, employee_count = None):
+        super().__init__(name, budget, supervisor, employee_count)
         self.__policies = set()
 
     @property
@@ -36,8 +36,8 @@ class Marketing(Department):
     Class: Inherits from department class, but adds the advertisements property
 
     '''
-    def __init__(self, name, supervisor = None, employee_count = None):
-        super().__init__(name, supervisor, employee_count)
+    def __init__(self, budget, name, supervisor = None, employee_count = None):
+        super().__init__(name, budget, supervisor, employee_count)
         self.__advertisements = list()
 
         @property
