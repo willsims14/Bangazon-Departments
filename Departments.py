@@ -3,7 +3,7 @@ from Department import Department
 # Human Resources Class
 class HumanResources(Department):
     '''
-    
+
     Class: Inherites from Department, but adds the policies property
 
     '''
@@ -56,3 +56,4 @@ class Marketing(Department):
                     self.__advertisements = vals
                 except:
                     raise ValueError("Could not set advertisements!")
+

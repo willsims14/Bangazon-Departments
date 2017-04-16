@@ -4,16 +4,18 @@ class Department(object):
     """ Parent class for all departments.  """
 
     def __init__(self, budget, name = None, supervisor = None, employee_count = None):
-            self.employees = set()
-            self.__name = name
-            self.__supervisor = supervisor
-            self.__employee_count = employee_count
-            self.__budget = budget
-            self.all_budgets = list()
+        self.employees = set()
+        self.__name = name
+        self.__supervisor = supervisor
+        self.__employee_count = employee_count
+        self.__employees = set()
+        self.__budget = budget
+        self.all_budgets = list()
+        self.__meeting_count = 0
 
-            for obj in gc.get_objects():
-                if isinstance(obj, Department):
-                    self.all_budgets.append([obj.name, obj.budget])
+        for obj in gc.get_objects():
+            if isinstance(obj, Department):
+                self.all_budgets.append([obj.name, obj.budget])
 
     ##################################################
     ##################  Properties ###################
@@ -41,7 +43,7 @@ class Department(object):
     # Supervisor Property ----------------------------------------------------------------
     @property
     def supervisor(self):
-        if(self.__supervisor == None):
+        if self.__supervisor is None:
             raise ValueError("No supervisor found!")
 
         try:
@@ -62,7 +64,7 @@ class Department(object):
     # Employees Property ----------------------------------------------------------------
     @property
     def employees(self):
-        if len(self.__employees) > 0:
+        if self.__employees:
             try:
                 return self.__employees
             except:
@@ -95,20 +97,37 @@ class Department(object):
 
     @property
     def budget(self):
-            try:
-                return self.__budget
-            except:
-                raise ValueError("Budget not found")
+        try:
+            return self.__budget
+        except:
+            raise ValueError("Budget not found")
 
     @budget.setter
     def budget(self, val):
         if not isinstance(val, float):
             raise TypeError("Budget must be a number")
-        if val > 5000 and not (val < 0):
+        if val > 5000 and val > 0:
             try:
                 self.__budget = val
             except:
                 raise ValueError("Couldnt find self.budget!")
+
+    @property
+    def meeting_count(self):
+        try:
+            return self.__meeting_count
+        except:
+            raise ValueError("No meeting count found")
+
+    @meeting_count.setter
+    def meeting_count(self, val):
+        if not isinstance(val, int):
+            raise TypeError('Not an integer')
+        else:
+            try:
+                self.__meeting_count = val
+            except:
+                raise ValueError("Needs to be an intefer")
 
 
 
@@ -117,9 +136,13 @@ class Department(object):
     ##################################################
 
 
-    def get_all_budgets(self):
-        for row in self.all_budgets:
-            print("{} : ${}".format(row[0], row[1]))
+
+    def meet(self):
+        self.meeting_count += 1
+        print("Everyone meet in {}'s office.".format(self.supervisor))
+
+
+
 
 
 

@@ -1,4 +1,4 @@
-from Departments import  *
+from Departments import HumanResources, Marketing
 
 
 # Create Human Resources instance
@@ -16,19 +16,10 @@ myMarketing.supervisor = 'John'
 myMarketing.employee_count = 1067
 myMarketing.advertisements = ['Ad 1', 'Ad 2', 'Ad 3']
 
-# # Print HR instance properties
-# print(myHr.name)
-# print(myHr.supervisor)
-# print(myHr.employee_count)
-
-# # Print Marketing instance properties
-# print(myMarketing.name)
-# print(myMarketing.supervisor)
-# print(myMarketing.employee_count)
-
 
 myMarketing.get_all_budgets()
-
+myMarketing.meet()
+print(myMarketing.meeting_count)
 
 
 
